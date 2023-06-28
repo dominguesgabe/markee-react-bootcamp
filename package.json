@@ -10,7 +10,7 @@
     "lint": "npx eslint src --ext ts,tsx --no-eslintrc --config .eslintrc-default.json",
     "lint:fix": "npx eslint src --ext ts,tsx --no-eslintrc --config .eslintrc-default.json --fix",
     "type-check": "npx tsc --project tsconfig.json --pretty --noEmit",
-    "prepare": "husky install"
+    "prepare": "npx husky install"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
