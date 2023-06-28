@@ -7,9 +7,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "npx eslint src --ext ts,tsx",
-    "lint:fix": "npm run lint --fix",
-    "type-check": "tsc --project tsconfig.json --pretty --noEmit"
+    "lint": "npx eslint src --ext ts,tsx --no-eslintrc --config .eslintrc-default.json",
+    "lint:fix": "npx eslint src --ext ts,tsx --no-eslintrc --config .eslintrc-default.json --fix",
+    "type-check": "npx tsc --project tsconfig.json --pretty --noEmit",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -50,6 +51,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3"
   }
 }
