@@ -1,15 +1,15 @@
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { theme } from 'resources/theme'
 import { App } from './app'
+import 'normalize.css'
 
-export function Root() {
-
-    return (
-        <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <App />
-        </ThemeProvider>
-    )
+export function Root () {
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
+  )
 }
 
 const GlobalStyle = createGlobalStyle`

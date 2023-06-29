@@ -1,9 +1,14 @@
-import { styled } from "styled-components/macro"
+import { styled, css } from 'styled-components/macro'
 
-export function App() {
-    return <Title>App</Title>
+export function App () {
+  return <Title teste="testando">App</Title>
 }
 
-const Title = styled.div`
-    color: ${(props) => props.theme.colors.primary}
-`
+type TitleProps = {
+    teste: string
+}
+
+const Title = styled.h1<TitleProps>`${({theme}) => css`
+    background: ${theme.colors.lightBlack};
+    color: ${theme.colors.primary};
+`}`
