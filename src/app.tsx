@@ -1,14 +1,18 @@
-import { styled, css } from 'styled-components/macro'
+import { Sidebar, MainLogoBox, Divider } from 'app-styles'
 
 export function App () {
-  return <Title teste="testando">App</Title>
+  return (
+    <>
+        <Sidebar>
+            <MainLogoBox>
+                <img src="/main-logo.png" alt="app logo" />
+            </MainLogoBox>
+            <Divider>
+                <p>
+                    Arquivos
+                </p>
+            </Divider>
+        </Sidebar>
+    </>
+  )
 }
-
-type TitleProps = {
-    teste: string
-}
-
-const Title = styled.h1<TitleProps>`${({theme}) => css`
-    background: ${theme.colors.lightBlack};
-    color: ${theme.colors.primary};
-`}`
