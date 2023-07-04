@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { styled, css } from "styled-components/macro";
+import { ReactNode } from 'react'
+import { styled, css } from 'styled-components/macro'
 
 type GenericProps = {
     children: ReactNode
@@ -16,6 +16,20 @@ export const Sidebar = styled.div<GenericProps>`${({ theme }) => css`
     background: ${theme.colors.black};
 `}`
 
+type DividerNameProps = {
+    children: string
+}
+
+export const DividerName = styled.p<DividerNameProps>`${({ theme }) => css`
+    margin: 0;
+    z-index: 2;
+    padding: 0 5px;
+    position: relative;
+    width: fit-content;
+    font-weight: 500;
+    background-color: ${theme.colors.black};
+`}`
+
 export const Divider = styled.div<GenericProps>`${({ theme }) => css`
     width: 100%;
     padding-left: 20px;
@@ -25,20 +39,10 @@ export const Divider = styled.div<GenericProps>`${({ theme }) => css`
     font-family: 'DM Sans', sans-serif;
     position: relative;
 
-    p {
-        margin: 0;
-        z-index: 2;
-        padding: 0 5px;
-        position: relative;
-        width: fit-content;
-        font-weight: 500;
-        background-color: ${theme.colors.black};
-    }
-
     &::after {
         content: "";
         width: 100%;
-        height: 1px;
+        height: 2px;
         display: block;
         top: 0;
         bottom: 0;
@@ -57,3 +61,19 @@ export const MainLogoBox = styled.div<GenericProps>`
     display: flex;
     justify-content: center;
 `
+
+export const AddFileButton = styled.button<GenericProps>`${({ theme }) => css`
+    width: 100%;
+    margin-top: 24px;
+    height: 38px;
+    font-size: 16px;
+    color: ${theme.colors.black};
+    background-color: ${theme.colors.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+`}`
