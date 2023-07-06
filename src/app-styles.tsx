@@ -6,7 +6,7 @@ type GenericProps = {
 }
 
 export const Sidebar = styled.div<GenericProps>`${({ theme }) => css`
-    width: 20%;
+    width: 25%;
     height: 100vh;
     padding: 45px 32px;
     display: flex;
@@ -65,7 +65,7 @@ export const MainLogoBox = styled.div<GenericProps>`
 export const AddFileButton = styled.button<GenericProps>`${({ theme }) => css`
     width: 100%;
     margin-top: 24px;
-    height: 38px;
+    height: 42px;
     font-size: 16px;
     color: ${theme.colors.black};
     background-color: ${theme.colors.primary};
@@ -73,7 +73,73 @@ export const AddFileButton = styled.button<GenericProps>`${({ theme }) => css`
     justify-content: center;
     align-items: center;
     gap: 12px;
+    cursor: pointer;
+    transition-duration: .2s;
+
     border: 0;
     border-radius: 4px;
-    cursor: pointer;
+    &:hover {
+        background-color: ${theme.colors.darkerPrimary};
+    }
 `}`
+
+export const FilesListingWrapper = styled.ul<GenericProps>`${({ theme }) => css`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 38px;
+    padding: 0;
+    color: ${theme.colors.gray};
+`}`
+
+/**/
+
+const Root = styled.li<GenericProps>`
+    width: 100%;
+    height: 42px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    align-items: center;
+    transition-duration: .2s;
+
+    border: 0;
+    border-radius: 4px;
+    &:hover {
+        background-color: rgba(255, 255, 255, .05)
+    }
+`
+
+type LinkProps = {
+    href: string
+}
+
+const Link = styled.a<LinkProps>`${({ theme }) => css`
+    font-size: 16px;
+    color: ${theme.colors.gray};
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &:hover {
+        color: ${theme.colors.white};
+    }
+`}`
+
+const Button = styled.button<GenericProps>`${({ theme }) => css`
+    background: none;
+    border: none;
+    color: ${theme.colors.white};
+    height: fit-content;
+`}`
+
+export const ListingFileItem = {
+  Root,
+  Link,
+  Button,
+}

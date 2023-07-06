@@ -1,13 +1,23 @@
 import {
-    Sidebar,
-    MainLogoBox,
-    Divider,
-    DividerName,
-    AddFileButton
+  Sidebar,
+  MainLogoBox,
+  Divider,
+  DividerName,
+  AddFileButton,
+  FilesListingWrapper,
 } from 'app-styles'
-import { ReactSVG } from "react-svg";
+import { File, FileProps } from 'resources/File'
+import { ReactSVG } from 'react-svg'
 
 export function App () {
+  const file: FileProps = {
+    id: 'uuid',
+    name: 'readme.md',
+    content: 'full content',
+    active: false,
+    status: 'saving',
+  }
+
   return (
     <>
       <Sidebar>
@@ -20,9 +30,12 @@ export function App () {
           </DividerName>
         </Divider>
         <AddFileButton>
-            <ReactSVG src='/svg/add-file.svg' />
-            Adicionar
+          <ReactSVG src='/svg/add-file.svg' />
+          Adicionar
         </AddFileButton>
+        <FilesListingWrapper>
+          <File {...file} />
+        </FilesListingWrapper>
       </Sidebar>
     </>
   )
