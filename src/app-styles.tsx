@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { Props, ReactSVG } from 'react-svg'
 import { styled, css } from 'styled-components/macro'
 
 type GenericProps = {
@@ -6,7 +7,7 @@ type GenericProps = {
 }
 
 export const Sidebar = styled.div<GenericProps>`${({ theme }) => css`
-    width: 25%;
+    width: 20%;
     height: 100vh;
     padding: 45px 32px;
     display: flex;
@@ -138,8 +139,16 @@ const Button = styled.button<GenericProps>`${({ theme }) => css`
     height: fit-content;
 `}`
 
+const Icon = styled(ReactSVG)<Props>`${({ theme }) => css`
+    background: none;
+    border: none;
+    color: ${theme.colors.white};
+    height: fit-content;
+`}`
+
 export const ListingFileItem = {
   Root,
   Link,
   Button,
+  Icon,
 }

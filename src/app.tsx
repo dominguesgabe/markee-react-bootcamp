@@ -10,13 +10,23 @@ import { File, FileProps } from 'resources/File'
 import { ReactSVG } from 'react-svg'
 
 export function App () {
-  const file: FileProps = {
-    id: 'uuid',
-    name: 'readme.md',
-    content: 'full content',
-    active: false,
-    status: 'saving',
-  }
+  const files: FileProps[] = [
+    {
+      id: 'uuid',
+      name: 'readme.md',
+      content: 'blebleble',
+      active: false,
+      status: 'saving',
+    },
+    {
+      id: 'uuid',
+      name: 'teste.md',
+      content: 'blebleble',
+      active: true,
+      status: 'editing',
+    },
+
+  ]
 
   return (
     <>
@@ -34,7 +44,17 @@ export function App () {
           Adicionar
         </AddFileButton>
         <FilesListingWrapper>
-          <File {...file} />
+          {
+                files.map(file => (
+                  <File
+                    key={file.id}
+                    id={file.id}
+                    name={file.name}
+                    active={file.active}
+                    status={file.status}
+                  />
+                ))
+            }
         </FilesListingWrapper>
       </Sidebar>
     </>
