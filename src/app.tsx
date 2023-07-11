@@ -1,15 +1,18 @@
 import {
-  Sidebar,
-  MainLogoBox,
-  Divider,
-  DividerName,
-  AddFileButton,
-  FilesListingWrapper,
   MainContent,
   AppWrapper,
+  AddFileButton,
 } from 'app-styles'
+import {
+  Sidebar,
+  Divider,
+  DividerName,
+  MainLogoBox,
+  FilesListingWrapper,
+} from 'resources/Sidebar'
 import { AddFileIcon } from 'ui'
-import { File, FileProps } from 'resources/File'
+import { File } from 'resources/File'
+import { FileProps } from 'types/AppTypes'
 import { EditingArea } from 'resources/EditingArea'
 import { OutputArea } from 'resources/OutputArea'
 
@@ -29,7 +32,6 @@ export function App () {
       active: true,
       status: 'saved',
     },
-
   ]
 
   return (
@@ -45,7 +47,6 @@ export function App () {
         </Divider>
         <AddFileButton>
           <AddFileIcon />
-          {/* <ReactSVG src='/svg/add-file.svg' /> */}
           Adicionar
         </AddFileButton>
         <FilesListingWrapper>

@@ -15,10 +15,9 @@ export const EditingArea = ({ file }: EditingAreaProps) => {
     <>
       <EditingAreaWrapper>
         <EditingFileName>
-          {/* <ReactSVG src='/svg/file-text.svg' /> */}
           <input value={file.name} />
         </EditingFileName>
-        <EditingTextarea>## TESTE</EditingTextarea>
+        <EditingTextarea value='## TESTE' />
       </EditingAreaWrapper>
     </>
   )
