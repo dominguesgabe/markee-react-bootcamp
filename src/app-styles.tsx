@@ -1,10 +1,15 @@
 import { ReactNode } from 'react'
-import { Props, ReactSVG } from 'react-svg'
 import { styled, css } from 'styled-components/macro'
+import { RemoveFileIcon } from 'ui'
 
 type GenericProps = {
     children: ReactNode
 }
+
+export const AppWrapper = styled.div<GenericProps>`
+    display: flex;
+    flex-wrap: wrap;
+`
 
 export const Sidebar = styled.div<GenericProps>`${({ theme }) => css`
     width: 20%;
@@ -96,9 +101,23 @@ export const FilesListingWrapper = styled.ul<GenericProps>`${({ theme }) => css`
     color: ${theme.colors.gray};
 `}`
 
-/**/
+/* composition */
 
-const Root = styled.li<GenericProps>`
+const RemoveButton = styled(RemoveFileIcon)<any>`${({ theme }) => css`
+    background: none;
+    border: none;
+    color: ${theme.colors.white};
+    height: fit-content;
+    transition-duration: 0.2s;
+
+    display: none;
+`}`
+
+type FileStyleProps = GenericProps & {
+    active: boolean
+}
+
+const Root = styled.li<FileStyleProps>`${({ active, theme }) => css`
     width: 100%;
     height: 42px;
     list-style: none;
@@ -107,19 +126,30 @@ const Root = styled.li<GenericProps>`
     padding: 0 10px;
     align-items: center;
     transition-duration: .2s;
+    cursor: pointer;
 
     border: 0;
     border-radius: 4px;
+
+    ${active && css`
+        background-color: ${theme.colors.hoverColor};
+    `}
+
     &:hover {
-        background-color: rgba(255, 255, 255, .05)
+        background-color: ${theme.colors.hoverColor};
+
+        ${!active && RemoveButton} {
+            display: block;
+        }
     }
-`
+`}`
 
 type LinkProps = {
     href: string
+    active: boolean
 }
 
-const Link = styled.a<LinkProps>`${({ theme }) => css`
+const Link = styled.a<LinkProps>`${({ theme, active }) => css`
     font-size: 16px;
     color: ${theme.colors.gray};
     text-decoration: none;
@@ -127,28 +157,79 @@ const Link = styled.a<LinkProps>`${({ theme }) => css`
     align-items: center;
     gap: 12px;
 
+    ${active && css`
+        color: ${theme.colors.white};
+        background-color: ${theme.colors.hoverColor};
+
+        svg {
+            color: ${theme.colors.primary}
+        }
+    `}
+
     &:hover {
         color: ${theme.colors.white};
     }
 `}`
 
-const Button = styled.button<GenericProps>`${({ theme }) => css`
-    background: none;
-    border: none;
-    color: ${theme.colors.white};
-    height: fit-content;
-`}`
-
-const Icon = styled(ReactSVG)<Props>`${({ theme }) => css`
-    background: none;
-    border: none;
-    color: ${theme.colors.white};
-    height: fit-content;
-`}`
-
 export const ListingFileItem = {
   Root,
   Link,
-  Button,
-  Icon,
+  RemoveButton,
 }
+
+/**/
+
+export const MainContent = styled.div<GenericProps>`
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+`
+
+export const EditingAreaWrapper = styled.div<GenericProps>`
+    width: 50%;
+    height: 100vh;
+    padding: 24px 30px;
+`
+
+export const EditingFileName = styled.div<GenericProps>`${({ theme }) => css`
+    display: flex;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: DM Sans;
+    color: ${theme.colors.black}
+
+    svg {
+        color: ${theme.colors.primary};
+        width: 25px;
+        height: 25px;
+    }
+
+    input {
+        border: 0;
+
+        &:focus {
+            outline: none;
+        }
+    }
+`}`
+
+export const EditingTextarea = styled.textarea<any>`
+    width: 100%;
+    max-width: 100%;
+    height: 90%;
+    border: 0;
+    font-family: Inconsolata;
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 48px;
+    outline: none;
+`
+
+export const OutputAreaWrapper = styled.div<GenericProps>`
+    width: 50%;
+    height: 85vh;
+    padding: 24px 30px;
+    border-left: 2px solid #1E293B20;
+`

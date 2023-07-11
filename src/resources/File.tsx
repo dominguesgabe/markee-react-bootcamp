@@ -1,23 +1,24 @@
 import { ListingFileItem } from 'app-styles'
+import { FileTextIcon } from 'ui'
+
+export type StatusProps = 'editing' | 'saving' | 'saved'
 
 export type FileProps = {
     id: string
     name: string
     content?: string
     active: boolean
-    status: 'editing' | 'saving' | 'saved'
+    status: StatusProps
 }
 
 export const File = (props: FileProps) => {
   return (
-    <ListingFileItem.Root>
-      <ListingFileItem.Link href='/'>
-        <ListingFileItem.Icon src='/svg/file-text.svg' />
+    <ListingFileItem.Root active={props.active}>
+      <ListingFileItem.Link href='/' active={props.active}>
+        <FileTextIcon />
         {props.name}
       </ListingFileItem.Link>
-      <ListingFileItem.Button>
-        <ListingFileItem.Icon src='/svg/delete-file.svg' />
-      </ListingFileItem.Button>
+      <ListingFileItem.RemoveButton />
     </ListingFileItem.Root>
   )
 }

@@ -8,5 +8,6 @@ export const theme: DefaultTheme = {
     white: '#FAFAFA',
     primary: '#1FC8E1',
     darkerPrimary: '#0D94A8',
+    hoverColor: '#2a3647',
   },
 }

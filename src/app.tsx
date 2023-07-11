@@ -5,31 +5,35 @@ import {
   DividerName,
   AddFileButton,
   FilesListingWrapper,
+  MainContent,
+  AppWrapper,
 } from 'app-styles'
+import { AddFileIcon } from 'ui'
 import { File, FileProps } from 'resources/File'
-import { ReactSVG } from 'react-svg'
+import { EditingArea } from 'resources/EditingArea'
+import { OutputArea } from 'resources/OutputArea'
 
 export function App () {
   const files: FileProps[] = [
     {
-      id: 'uuid',
+      id: '1',
       name: 'readme.md',
       content: 'blebleble',
       active: false,
       status: 'saving',
     },
     {
-      id: 'uuid',
+      id: '2',
       name: 'teste.md',
       content: 'blebleble',
       active: true,
-      status: 'editing',
+      status: 'saved',
     },
 
   ]
 
   return (
-    <>
+    <AppWrapper>
       <Sidebar>
         <MainLogoBox>
           <img src='/main-logo.png' alt='app logo' />
@@ -40,23 +44,28 @@ export function App () {
           </DividerName>
         </Divider>
         <AddFileButton>
-          <ReactSVG src='/svg/add-file.svg' />
+          <AddFileIcon />
+          {/* <ReactSVG src='/svg/add-file.svg' /> */}
           Adicionar
         </AddFileButton>
         <FilesListingWrapper>
           {
-                files.map(file => (
-                  <File
-                    key={file.id}
-                    id={file.id}
-                    name={file.name}
-                    active={file.active}
-                    status={file.status}
-                  />
-                ))
-            }
+                    files.map(file => (
+                      <File
+                        key={file.id}
+                        id={file.id}
+                        name={file.name}
+                        active={file.active}
+                        status={file.status}
+                      />
+                    ))
+                }
         </FilesListingWrapper>
       </Sidebar>
-    </>
+      <MainContent>
+        <EditingArea file={files[0]} />
+        <OutputArea file={files[0]} />
+      </MainContent>
+    </AppWrapper>
   )
 }

@@ -7,6 +7,7 @@ declare module 'styled-components' {
         gray: string
         primary: string
         darkerPrimary: string
+        hoverColor: string
       }
     }
   }
