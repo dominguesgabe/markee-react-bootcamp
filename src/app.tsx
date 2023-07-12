@@ -10,8 +10,8 @@ import {
   MainLogoBox,
   FilesListingWrapper,
 } from 'resources/Sidebar'
-import { AddFileIcon } from 'ui'
-import { File } from 'resources/File'
+import { AddFileIcon } from 'utils/SvgIcons'
+import { File } from 'File'
 import { FileProps } from 'types/AppTypes'
 import { EditingArea } from 'resources/EditingArea'
 import { OutputArea } from 'resources/OutputArea'
@@ -30,7 +30,7 @@ export function App () {
       name: 'teste.md',
       content: 'blebleble',
       active: true,
-      status: 'saved',
+      status: 'saving',
     },
   ]
 

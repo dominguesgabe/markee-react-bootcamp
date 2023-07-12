@@ -1,6 +1,11 @@
 import { styled, css } from 'styled-components'
-import { DividerNameProps, FileStyleProps, GenericProps, LinkProps } from 'types/AppTypes'
-import { RemoveFileIcon } from 'ui'
+import {
+  DividerNameProps,
+  FileStyleProps,
+  GenericProps,
+  LinkProps,
+} from 'types/AppTypes'
+import { RemoveFileIcon } from 'utils/SvgIcons'
 
 export const Sidebar = styled.div<GenericProps>`${({ theme }) => css`
     width: 18%;

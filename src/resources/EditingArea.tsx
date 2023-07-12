@@ -3,7 +3,7 @@ import {
   EditingFileName,
   EditingTextarea,
 } from 'app-styles'
-import { FileProps } from 'resources/File'
+import { FileProps } from 'types/AppTypes'
 
 type EditingAreaProps = {
     file: FileProps
