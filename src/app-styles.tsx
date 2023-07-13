@@ -27,60 +27,61 @@ export const AddFileButton = styled.button<GenericProps>`${({ theme }) => css`
     }
 `}`
 
-export const MainContent = styled.div<GenericProps>`
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-`
-
-export const EditingAreaWrapper = styled.div<GenericProps>`
-    width: 50%;
+export const MainContentWrapper = styled.div<GenericProps>`
+    width: 82%;
     height: 100vh;
     padding: 24px 30px;
 `
 
-export const EditingFileName = styled.div<GenericProps>`${({ theme }) => css`
-    display: flex;
+type EditingFileNameProps = {
+    value: string
+}
+
+export const EditingFileName = styled.input<EditingFileNameProps>`${({ theme }) => css`
+    width: 100%;
+    height: 10%;
     gap: 12px;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 20px;
     font-family: DM Sans;
-    color: ${theme.colors.black}
+    color: ${theme.colors.black};
+    border: 0;
+    padding-left: 40px;
+    background: url('/file-text.svg') left center no-repeat;
 
-    svg {
-        color: ${theme.colors.primary};
-        width: 25px;
-        height: 25px;
-    }
-
-    input {
-        border: 0;
-
-        &:focus {
-            outline: none;
-        }
+    &:focus {
+        outline: none;
     }
 `}`
 
-// todo fix
+export const EditingWrapper = styled.div`
+    width: 100%;
+    height: 90%;
+    display: flex;
+    gap: 2px;
+    padding-top: 40px;
+`
 
-export const EditingTextarea = styled.textarea<any>`
+export const EditingTextarea = styled.textarea`
     width: 100%;
     max-width: 100%;
-    height: 90%;
     border: 0;
     font-family: Inconsolata;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
-    margin-top: 48px;
     outline: none;
+    resize: none;
 `
 
-// todo fix type
-export const OutputAreaWrapper = styled.div<any>`
-    width: 50%;
-    height: 85vh;
-    padding: 24px 30px;
-    border-left: 2px solid #1E293B20;
-`
+export const OutputArticle = styled.article`${({ theme }) => css`
+    width: 100%;
+    font-size: 24px;
+    font-family: DM Sans;
+    color: ${theme.colors.black};
+    border-left: 2px solid ${theme.colors.gray};
+    padding: 0 30px;
+
+
+    &:focus {
+        outline: none;
+    }
+`}`

@@ -1,7 +1,8 @@
 import {
-  MainContent,
+  MainContentWrapper,
   AppWrapper,
   AddFileButton,
+  EditingFileName,
 } from 'app-styles'
 import {
   Sidebar,
@@ -14,7 +15,6 @@ import { AddFileIcon } from 'utils/SvgIcons'
 import { File } from 'File'
 import { FileProps } from 'types/AppTypes'
 import { EditingArea } from 'resources/EditingArea'
-import { OutputArea } from 'resources/OutputArea'
 
 export function App () {
   const files: FileProps[] = [
@@ -30,7 +30,7 @@ export function App () {
       name: 'teste.md',
       content: 'blebleble',
       active: true,
-      status: 'saving',
+      status: 'saved',
     },
   ]
 
@@ -63,10 +63,10 @@ export function App () {
                 }
         </FilesListingWrapper>
       </Sidebar>
-      <MainContent>
+      <MainContentWrapper>
+        <EditingFileName value={files[0].name} />
         <EditingArea file={files[0]} />
-        <OutputArea file={files[0]} />
-      </MainContent>
+      </MainContentWrapper>
     </AppWrapper>
   )
 }
