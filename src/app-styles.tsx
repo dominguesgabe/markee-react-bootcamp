@@ -74,7 +74,7 @@ export const EditingTextarea = styled.textarea`
 
 export const OutputArticle = styled.article`${({ theme }) => css`
     width: 100%;
-    font-size: 24px;
+    font-size: 16px;
     font-family: DM Sans;
     color: ${theme.colors.black};
     border-left: 2px solid ${theme.colors.gray};
