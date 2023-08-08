@@ -1,4 +1,10 @@
-import { ReactNode } from 'react'
+import {
+  ReactNode,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  RefObject,
+} from 'react'
 
 export type StatusProps = 'editing' | 'saving' | 'saved'
 
@@ -9,6 +15,13 @@ export type FileProps = {
     active: boolean
     status: StatusProps
 }
+
+export type FileItemProps = {
+    file: FileProps
+    files: FileProps[]
+    setFiles: Dispatch<SetStateAction<FileProps[]>>
+    inputRef: RefObject<HTMLInputElement>
+  }
 
 export type GenericProps = {
     children: ReactNode
@@ -29,4 +42,9 @@ export type DividerNameProps = {
 
 export type OutputAreaProps = {
     file: FileProps
+}
+
+export type EditingFileNameProps = {
+    value: string
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }

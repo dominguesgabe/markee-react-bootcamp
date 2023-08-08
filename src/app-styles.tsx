@@ -1,5 +1,5 @@
 import { styled, css } from 'styled-components/macro'
-import { GenericProps } from 'types/AppTypes'
+import { EditingFileNameProps, GenericProps } from 'types/AppTypes'
 
 export const AppWrapper = styled.div<GenericProps>`
     display: flex;
@@ -32,10 +32,6 @@ export const MainContentWrapper = styled.div<GenericProps>`
     height: 100vh;
     padding: 24px 30px;
 `
-
-type EditingFileNameProps = {
-    value: string
-}
 
 export const EditingFileName = styled.input<EditingFileNameProps>`${({ theme }) => css`
     width: 100%;

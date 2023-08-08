@@ -12,22 +12,47 @@ import {
   FilesListingWrapper,
 } from 'resources/Sidebar'
 import { AddFileIcon } from 'utils/SvgIcons'
-import { File } from 'File'
+import { FileItem } from 'FileItem'
 import { FileProps } from 'types/AppTypes'
 import { EditingArea } from 'resources/EditingArea'
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect, useRef, ChangeEvent } from 'react'
 import { FileObject } from 'utils/FileObject'
+import { InactivateFiles } from 'utils/UtilFiles'
 
 export function App () {
   const [files, setFiles] = useState<FileProps[]>([])
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (files.length) {
+      document.title = files.find(file => file.active === true)?.name ?? ''
+    }
+  })
+
   const handleAddFile = (): void => {
-    const inactiveOldFiles = files.map(file => ({ ...file, active: false }))
+    const inactiveOldFiles = InactivateFiles(files)
+    inputRef.current?.focus()
 
     setFiles([
       ...inactiveOldFiles,
       new FileObject(),
     ])
+  }
+
+  const handleChangeFileName = (event: ChangeEvent<HTMLInputElement>): void => {
+    const filesWithNewFileName = files.map(file => {
+      if (file.active) {
+        return {
+          ...file,
+          name: event.target.value,
+        }
+      }
+
+      return file
+    })
+
+    setFiles(filesWithNewFileName)
   }
 
   return (
@@ -48,12 +73,12 @@ export function App () {
         <FilesListingWrapper>
           {
             files.map(file => (
-              <File
+              <FileItem
                 key={file.id}
-                id={file.id}
-                name={file.name}
-                active={file.active}
-                status={file.status}
+                file={file}
+                files={files}
+                setFiles={setFiles}
+                inputRef={inputRef}
               />
             ))
           }
@@ -61,12 +86,17 @@ export function App () {
       </Sidebar>
       <MainContentWrapper>
         {
-          files.map(file => (
-            <Fragment key={file.id}>
-              <EditingFileName value={file.name} />
-              <EditingArea file={file} />
-            </Fragment>
-          ))
+          files.map(file => {
+            if (!file.active) {
+              return ''
+            }
+            return (
+              <Fragment key={file.id}>
+                <EditingFileName value={file.name} ref={inputRef} onChange={handleChangeFileName} />
+                <EditingArea file={file} />
+              </Fragment>
+            )
+          })
         }
       </MainContentWrapper>
     </AppWrapper>
