@@ -15,9 +15,11 @@ import { AddFileIcon } from 'utils/SvgIcons'
 import { File } from 'File'
 import { FileProps } from 'types/AppTypes'
 import { EditingArea } from 'resources/EditingArea'
+import { useState } from 'react'
+import { FileObject } from 'utils/FileObject'
 
 export function App () {
-  const files: FileProps[] = [
+  const [files, setFiles] = useState<FileProps[]>([
     {
       id: '1',
       name: 'readme.md',
@@ -32,7 +34,18 @@ export function App () {
       active: true,
       status: 'saved',
     },
-  ]
+  ])
+
+  const handleAddFile = (): void => {
+    files.forEach(function (file) {
+      file.active = false
+    })
+
+    setFiles([
+      ...files,
+      new FileObject(),
+    ])
+  }
 
   return (
     <AppWrapper>
@@ -45,7 +58,7 @@ export function App () {
             Arquivos
           </DividerName>
         </Divider>
-        <AddFileButton>
+        <AddFileButton onClick={handleAddFile}>
           <AddFileIcon />
           Adicionar
         </AddFileButton>

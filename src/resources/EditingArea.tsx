@@ -30,6 +30,7 @@ export const EditingArea = ({ file }: EditingAreaProps) => {
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value)
+    console.log(file)
   }
 
   return (
