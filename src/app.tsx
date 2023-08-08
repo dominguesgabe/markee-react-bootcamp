@@ -15,34 +15,17 @@ import { AddFileIcon } from 'utils/SvgIcons'
 import { File } from 'File'
 import { FileProps } from 'types/AppTypes'
 import { EditingArea } from 'resources/EditingArea'
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import { FileObject } from 'utils/FileObject'
 
 export function App () {
-  const [files, setFiles] = useState<FileProps[]>([
-    {
-      id: '1',
-      name: 'readme.md',
-      content: 'blebleble',
-      active: false,
-      status: 'saving',
-    },
-    {
-      id: '2',
-      name: 'teste.md',
-      content: 'blebleble',
-      active: true,
-      status: 'saved',
-    },
-  ])
+  const [files, setFiles] = useState<FileProps[]>([])
 
   const handleAddFile = (): void => {
-    files.forEach(function (file) {
-      file.active = false
-    })
+    const inactiveOldFiles = files.map(file => ({ ...file, active: false }))
 
     setFiles([
-      ...files,
+      ...inactiveOldFiles,
       new FileObject(),
     ])
   }
@@ -64,21 +47,27 @@ export function App () {
         </AddFileButton>
         <FilesListingWrapper>
           {
-                    files.map(file => (
-                      <File
-                        key={file.id}
-                        id={file.id}
-                        name={file.name}
-                        active={file.active}
-                        status={file.status}
-                      />
-                    ))
-                }
+            files.map(file => (
+              <File
+                key={file.id}
+                id={file.id}
+                name={file.name}
+                active={file.active}
+                status={file.status}
+              />
+            ))
+          }
         </FilesListingWrapper>
       </Sidebar>
       <MainContentWrapper>
-        <EditingFileName value={files[0].name} />
-        <EditingArea file={files[0]} />
+        {
+          files.map(file => (
+            <Fragment key={file.id}>
+              <EditingFileName value={file.name} />
+              <EditingArea file={file} />
+            </Fragment>
+          ))
+        }
       </MainContentWrapper>
     </AppWrapper>
   )
