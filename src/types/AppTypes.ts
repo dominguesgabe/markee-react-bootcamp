@@ -16,10 +16,13 @@ export type FileProps = {
     status: StatusProps
 }
 
-export type FileItemProps = {
+export type EditingAreaProps = {
     file: FileProps
     files: FileProps[]
     setFiles: Dispatch<SetStateAction<FileProps[]>>
+}
+
+export type FileItemProps = EditingAreaProps & {
     inputRef: RefObject<HTMLInputElement>
   }
 

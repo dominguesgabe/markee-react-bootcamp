@@ -1,8 +1,9 @@
 import { EditingTextarea, EditingWrapper, OutputArticle } from 'app-styles'
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { marked } from 'marked'
 import { sanitize } from 'dompurify'
-import { FileProps } from 'types/AppTypes'
+import { EditingAreaProps } from 'types/AppTypes'
+import { UpdateFileParam } from 'utils/UtilFiles'
 import 'highlight.js/styles/mono-blue.css'
 
 import('highlight.js').then((hljs) => {
@@ -21,16 +22,20 @@ import('highlight.js').then((hljs) => {
   })
 })
 
-type EditingAreaProps = {
-    file: FileProps
-}
-
-export const EditingArea = ({ file }: EditingAreaProps) => {
+export const EditingArea = ({ file, files, setFiles }: EditingAreaProps) => {
   const [content, setContent] = useState('')
+
+  useEffect(() => {
+    if (file.content) {
+      setContent(file.content)
+    }
+  }, [])
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value)
-    console.log(file)
+
+    // const updatedContentInFiles = UpdateFileParam(files, 'content', content)
+    // setFiles(updatedContentInFiles)
   }
 
   return (

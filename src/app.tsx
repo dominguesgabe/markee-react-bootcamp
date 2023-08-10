@@ -1,26 +1,37 @@
 import {
-  MainContentWrapper,
   AppWrapper,
   AddFileButton,
-  EditingFileName,
 } from 'app-styles'
 import {
-  Sidebar,
   Divider,
   DividerName,
   MainLogoBox,
   FilesListingWrapper,
+  Sidebar,
 } from 'resources/Sidebar'
+import {
+  useState,
+  useEffect,
+  useRef,
+  ChangeEvent,
+} from 'react'
 import { AddFileIcon } from 'utils/SvgIcons'
-import { FileItem } from 'FileItem'
+import { FileItem } from 'resources/FileItem'
 import { FileProps } from 'types/AppTypes'
-import { EditingArea } from 'resources/EditingArea'
-import { useState, Fragment, useEffect, useRef, ChangeEvent } from 'react'
 import { FileObject } from 'utils/FileObject'
 import { InactivateFiles } from 'utils/UtilFiles'
+import { MainContent } from 'MainContent'
 
 export function App () {
-  const [files, setFiles] = useState<FileProps[]>([])
+  const [files, setFiles] = useState<FileProps[]>([
+    {
+      id: "aaaa",
+      active: true,
+      name: "gabe",
+      content: "teste gabe",
+      status: "saving"
+    }
+  ])
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -32,27 +43,12 @@ export function App () {
 
   const handleAddFile = (): void => {
     const inactiveOldFiles = InactivateFiles(files)
-    inputRef.current?.focus()
+    inputRef.current?.focus() // todo: do not work on first click event
 
     setFiles([
       ...inactiveOldFiles,
       new FileObject(),
     ])
-  }
-
-  const handleChangeFileName = (event: ChangeEvent<HTMLInputElement>): void => {
-    const filesWithNewFileName = files.map(file => {
-      if (file.active) {
-        return {
-          ...file,
-          name: event.target.value,
-        }
-      }
-
-      return file
-    })
-
-    setFiles(filesWithNewFileName)
   }
 
   return (
@@ -84,21 +80,11 @@ export function App () {
           }
         </FilesListingWrapper>
       </Sidebar>
-      <MainContentWrapper>
-        {
-          files.map(file => {
-            if (!file.active) {
-              return ''
-            }
-            return (
-              <Fragment key={file.id}>
-                <EditingFileName value={file.name} ref={inputRef} onChange={handleChangeFileName} />
-                <EditingArea file={file} />
-              </Fragment>
-            )
-          })
-        }
-      </MainContentWrapper>
+      <MainContent
+        files={files}
+        inputRef={inputRef}
+        setFiles={setFiles}
+      />
     </AppWrapper>
   )
 }

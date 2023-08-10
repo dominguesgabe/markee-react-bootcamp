@@ -1,5 +1,5 @@
-import { FileTextIcon } from './utils/SvgIcons'
-import { ListingFileItem } from './resources/Sidebar'
+import { FileTextIcon } from '../utils/SvgIcons'
+import { ListingFileItem } from './Sidebar'
 import { FileItemProps } from 'types/AppTypes'
 import { StatusIcon } from 'resources/Status'
 import { MouseEvent } from 'react'
