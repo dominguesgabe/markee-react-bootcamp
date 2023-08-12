@@ -7,7 +7,7 @@ import {
 } from 'types/AppTypes'
 import { RemoveFileIcon } from 'utils/SvgIcons'
 
-export const Sidebar = styled.div<GenericProps>`${({ theme }) => css`
+export const SidebarWrapper = styled.div<GenericProps>`${({ theme }) => css`
     width: 18%;
     height: 100vh;
     padding: 45px 32px;

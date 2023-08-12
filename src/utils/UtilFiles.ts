@@ -17,23 +17,3 @@ export const ActivateClickedFile = (fileId: string, files: FileProps[]) => {
     }
   })
 }
-
-export const UpdateFileParam = (
-  id: string,
-  files: FileProps[],
-  key: string,
-  newValue: string | boolean | StatusProps,
-): FileProps[] => {
-  const newFilesArray = files.map(newFile => {
-    if (id === newFile.id) {
-      // return {
-      //   ...file,
-      //   [key]: newValue,
-      // }
-    }
-
-    return newFile
-  })
-
-  return newFilesArray
-}

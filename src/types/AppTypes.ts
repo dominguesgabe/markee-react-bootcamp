@@ -17,7 +17,6 @@ export type FileProps = {
 }
 
 export type EditingAreaProps = {
-    file: FileProps
     files: FileProps[]
     setFiles: Dispatch<SetStateAction<FileProps[]>>
 }

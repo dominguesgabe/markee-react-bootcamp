@@ -3,7 +3,6 @@ import { useState, ChangeEvent, useEffect } from 'react'
 import { marked } from 'marked'
 import { sanitize } from 'dompurify'
 import { EditingAreaProps } from 'types/AppTypes'
-import { UpdateFileParam } from 'utils/UtilFiles'
 import 'highlight.js/styles/mono-blue.css'
 
 import('highlight.js').then((hljs) => {
@@ -22,12 +21,15 @@ import('highlight.js').then((hljs) => {
   })
 })
 
-export const EditingArea = ({ file, files, setFiles }: EditingAreaProps) => {
+export const EditingArea = ({ files, setFiles }: EditingAreaProps) => {
   const [content, setContent] = useState('')
 
   useEffect(() => {
-    if (file.content) {
-      setContent(file.content)
+
+    const activeFile = files.find(file => file.active)?.content
+
+    if (activeFile?.content) {
+      setContent(activeFile.content)
     }
   }, [])
 
