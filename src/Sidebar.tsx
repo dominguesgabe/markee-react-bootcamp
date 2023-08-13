@@ -1,9 +1,4 @@
 import { AddFileButton } from 'app-styles'
-import {
-  Dispatch,
-  SetStateAction,
-  RefObject,
-} from 'react'
 import { FileItem } from 'resources/FileItem'
 import {
   Divider,
@@ -12,27 +7,13 @@ import {
   MainLogoBox,
   SidebarWrapper,
 } from 'resources/Sidebar'
-import { FileProps } from 'types/AppTypes'
-import { FileObject } from 'utils/FileObject'
+import { SideBarProps } from 'types/AppTypes'
 import { AddFileIcon } from 'utils/SvgIcons'
-import { InactivateFiles } from 'utils/UtilFiles'
 
-type SideBarProps = {
-  files: FileProps[]
-  inputRef: RefObject<HTMLInputElement>
-  setFiles: Dispatch<SetStateAction<FileProps[]>>
-}
 
-export const Sidebar = ({ files, setFiles, inputRef }: SideBarProps) => {
-  const handleAddFile = (): void => {
-    const inactiveOldFiles = InactivateFiles(files)
-    inputRef.current?.focus() // todo: do not work on first click event
 
-    setFiles([
-      ...inactiveOldFiles,
-      new FileObject(),
-    ])
-  }
+export const Sidebar = ({ files, inputRef, switchActiveFile, handleAddFile }: SideBarProps) => {
+  
 
   return (
     <SidebarWrapper>
@@ -54,8 +35,7 @@ export const Sidebar = ({ files, setFiles, inputRef }: SideBarProps) => {
             <FileItem
               key={file.id}
               file={file}
-              files={files}
-              setFiles={setFiles}
+              switchActiveFile={switchActiveFile}
               inputRef={inputRef}
             />
           ))

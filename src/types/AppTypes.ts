@@ -11,18 +11,33 @@ export type StatusProps = 'editing' | 'saving' | 'saved'
 export type FileProps = {
     id: string
     name: string
-    content?: string
+    content: string
     active: boolean
     status: StatusProps
 }
 
-export type EditingAreaProps = {
+export type MainContentProps = {
+    file: FileProps
+    inputRef: RefObject<HTMLInputElement>
+}
+
+export type SideBarProps = {
     files: FileProps[]
+    inputRef: RefObject<HTMLInputElement>
+    setFiles: Dispatch<SetStateAction<FileProps[]>>
+    handleAddFile: () => void
+    switchActiveFile: (id: string) => void
+  }
+
+export type EditingAreaProps = {
+    file: FileProps
     setFiles: Dispatch<SetStateAction<FileProps[]>>
 }
 
-export type FileItemProps = EditingAreaProps & {
+export type FileItemProps = {
+    file: FileProps
     inputRef: RefObject<HTMLInputElement>
+    switchActiveFile: (id: string) => void
   }
 
 export type GenericProps = {

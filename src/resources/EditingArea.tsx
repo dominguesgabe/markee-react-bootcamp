@@ -21,16 +21,16 @@ import('highlight.js').then((hljs) => {
   })
 })
 
-export const EditingArea = ({ files, setFiles }: EditingAreaProps) => {
+export const EditingArea = ({ file, setFiles }: EditingAreaProps) => {
   const [content, setContent] = useState('')
 
   useEffect(() => {
 
-    const activeFile = files.find(file => file.active)?.content
+    // const activeFile = files.find(file => file.active)?.content
 
-    if (activeFile?.content) {
-      setContent(activeFile.content)
-    }
+    // if (activeFile?.content) {
+    //   setContent(activeFile.content)
+    // }
   }, [])
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -44,11 +44,11 @@ export const EditingArea = ({ files, setFiles }: EditingAreaProps) => {
     <EditingWrapper>
       <EditingTextarea
         placeholder='# Digite aqui seu texto'
-        value={content}
+        value={file.content}
         onChange={handleChange}
       />
       <OutputArticle dangerouslySetInnerHTML={{
-        __html: marked.parse(sanitize(content)),
+        __html: marked.parse(sanitize(file.content)),
       }}
       />
     </EditingWrapper>
