@@ -14,9 +14,9 @@ export const FileItem = ({ file, switchActiveFile }: FileItemProps) => {
     <ListingFileItem.Root active={file.active} onClick={handleItemClick}>
       <ListingFileItem.Link href='/' active={file.active}>
         <FileTextIcon title='teste' />
-        { file.name }
+        {file.name}
       </ListingFileItem.Link>
-      { file.active && <StatusIcon status={file.status} /> }
+      {file.active && <StatusIcon status={file.status} />}
       <ListingFileItem.RemoveButton />
     </ListingFileItem.Root>
   )

@@ -13,7 +13,6 @@ import { FileObject } from 'utils/FileObject'
 import { MainContent } from 'resources/MainContent'
 
 export function App () {
-
   const [files, setFiles] = useState<FileProps[]>([
     {
       id: 'aaaa',
@@ -29,12 +28,9 @@ export function App () {
   useEffect(() => {
     if (files.length) {
       document.title = files.find(file => file.active === true)?.name ?? ''
-
-      console.log(files.find(file => file.active));
-      
     }
-    // inputRef.current?.focus() // todo: do not work on first click event
     
+    inputRef.current?.focus() // todo: do not work on first click event
   })
 
   const switchActiveFile = (id: string) => {
@@ -42,20 +38,20 @@ export function App () {
       if (file.id !== id) {
         return {
           ...file,
-          active: false
+          active: false,
         }
       }
 
       return {
         ...file,
-        active: true
+        active: true,
       }
     }))
   }
 
   const handleAddFile = (): void => {
     const inactiveOldFiles = InactivateFiles(files)
-    
+
     setFiles([
       ...inactiveOldFiles,
       new FileObject(),
@@ -72,7 +68,7 @@ export function App () {
         switchActiveFile={switchActiveFile}
       />
       <MainContent
-        file={files.find(file => file.active)}
+        file={files.find(file => file.active)!}
         inputRef={inputRef}
       />
     </AppWrapper>

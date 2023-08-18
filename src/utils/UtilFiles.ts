@@ -1,4 +1,4 @@
-import { FileProps, StatusProps } from 'types/AppTypes'
+import { FileProps } from 'types/AppTypes'
 
 export const InactivateFiles = (files: FileProps[]) => files.map(file => ({ ...file, active: false }))
 

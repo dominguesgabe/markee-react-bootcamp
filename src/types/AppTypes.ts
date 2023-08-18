@@ -31,7 +31,6 @@ export type SideBarProps = {
 
 export type EditingAreaProps = {
     file: FileProps
-    setFiles: Dispatch<SetStateAction<FileProps[]>>
 }
 
 export type FileItemProps = {

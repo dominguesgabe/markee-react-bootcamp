@@ -21,7 +21,7 @@ import('highlight.js').then((hljs) => {
   })
 })
 
-export const EditingArea = ({ file, setFiles }: EditingAreaProps) => {
+export const EditingArea = ({ file }: EditingAreaProps) => {
   const [content, setContent] = useState('')
 
   useEffect(() => {
