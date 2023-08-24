@@ -19,7 +19,7 @@ export function App () {
       active: true,
       name: 'gabe',
       content: 'teste gabe',
-      status: 'saving',
+      status: 'editing',
     },
   ])
 
@@ -29,9 +29,17 @@ export function App () {
     if (files.length) {
       document.title = files.find(file => file.active === true)?.name ?? ''
     }
-    
-    inputRef.current?.focus() // todo: do not work on first click event
+
+    // inputRef.current?.focus() // todo: do not work on first click event
   })
+
+  // useEffect(() => {
+  //   if (files.find(file => file.status === 'editing')) {
+  //     const timeout = setTimeout(() => {
+
+  //     }, 300)
+  //   }
+  // }, [files])
 
   const switchActiveFile = (id: string) => {
     setFiles(files.map(file => {
@@ -45,6 +53,7 @@ export function App () {
       return {
         ...file,
         active: true,
+        status: 'editing',
       }
     }))
   }
@@ -58,6 +67,63 @@ export function App () {
     ])
   }
 
+  const handleUpdateFileName = (id: string, newName: string): void => {
+    const filesUpdated: FileProps[] = files.map(file => {
+      if (file.id === id) {
+        return {
+          ...file,
+          status: 'editing',
+          name: newName,
+        }
+      }
+
+      return file
+    })
+
+    setFiles(filesUpdated)
+  }
+
+  const handleUpdateFileContent = (id: string, newContent: string): void => {
+    const filesUpdated: FileProps[] = files.map(file => {
+      if (file.id === id) {
+        return {
+          ...file,
+          status: 'editing',
+          content: newContent,
+        }
+      }
+
+      return file
+    })
+
+    setFiles(filesUpdated)
+    // setSaving(id)
+  }
+
+  // const handleUpdateFileAttribute = (id: string, attribute: string, newValue: string | boolean) => {
+  //   const filesUpdated: FileProps[] = files.map(file => {
+  //     if (file.id === id) {
+
+  //       return {
+  //         ...file,
+  //         [attribute]: newValue
+  //       }
+  //     }
+
+  //     return file
+  //   })
+
+  //   setFiles(filesUpdated)
+  // }
+
+  // const setSaving = (id: string) => {
+  //   const timeout = setTimeout(() => {
+  //     handleUpdateFileAttribute(id, 'status', 'saving')
+  //   }, 300);
+
+  //   // return () => clearTimeout(timeout)
+  // }
+
   return (
     <AppWrapper>
       <Sidebar
@@ -70,6 +136,8 @@ export function App () {
       <MainContent
         file={files.find(file => file.active)!}
         inputRef={inputRef}
+        handleUpdateFileName={handleUpdateFileName}
+        handleUpdateFileContent={handleUpdateFileContent}
       />
     </AppWrapper>
   )

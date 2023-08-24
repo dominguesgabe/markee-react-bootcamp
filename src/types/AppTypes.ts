@@ -19,6 +19,8 @@ export type FileProps = {
 export type MainContentProps = {
     file: FileProps
     inputRef: RefObject<HTMLInputElement>
+    handleUpdateFileName: (id: string, newName: string) => void
+    handleUpdateFileContent: (id: string, newName: string) => void
 }
 
 export type SideBarProps = {
