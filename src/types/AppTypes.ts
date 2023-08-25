@@ -29,6 +29,7 @@ export type SideBarProps = {
     setFiles: Dispatch<SetStateAction<FileProps[]>>
     handleAddFile: () => void
     switchActiveFile: (id: string) => void
+    handleRemoveFile: (id: string) => void
   }
 
 export type EditingAreaProps = {
@@ -39,6 +40,7 @@ export type FileItemProps = {
     file: FileProps
     inputRef: RefObject<HTMLInputElement>
     switchActiveFile: (id: string) => void
+    handleRemoveFile: (id: string) => void
   }
 
 export type GenericProps = {

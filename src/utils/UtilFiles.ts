@@ -13,6 +13,7 @@ export const ActivateClickedFile = (fileId: string, files: FileProps[]) => {
       return {
         ...file,
         active: false,
+        status: 'saved',
       }
     }
   })

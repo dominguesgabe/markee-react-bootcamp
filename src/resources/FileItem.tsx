@@ -4,10 +4,14 @@ import { FileItemProps } from 'types/AppTypes'
 import { StatusIcon } from 'resources/Status'
 import { MouseEvent } from 'react'
 
-export const FileItem = ({ file, switchActiveFile }: FileItemProps) => {
+export const FileItem = ({ file, switchActiveFile, handleRemoveFile }: FileItemProps) => {
   const handleItemClick = (event: MouseEvent<HTMLLIElement>) => {
     event.preventDefault()
     switchActiveFile(file.id)
+  }
+
+  const removeFile = () => {
+    handleRemoveFile(file.id)
   }
 
   return (
@@ -17,7 +21,7 @@ export const FileItem = ({ file, switchActiveFile }: FileItemProps) => {
         {file.name}
       </ListingFileItem.Link>
       {file.active && <StatusIcon status={file.status} />}
-      <ListingFileItem.RemoveButton />
+      <ListingFileItem.RemoveButton onClick={removeFile} />
     </ListingFileItem.Root>
   )
 }

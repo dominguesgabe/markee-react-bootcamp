@@ -18,8 +18,8 @@ export function App () {
       id: 'aaaa',
       active: true,
       name: 'gabe',
-      content: 'teste gabe',
-      status: 'editing',
+      content: '## teste gabe',
+      status: 'saved',
     },
   ])
 
@@ -29,36 +29,72 @@ export function App () {
     if (files.length) {
       document.title = files.find(file => file.active === true)?.name ?? ''
     }
-
-    // inputRef.current?.focus() // todo: do not work on first click event
   })
 
-  // useEffect(() => {
-  //   if (files.find(file => file.status === 'editing')) {
-  //     const timeout = setTimeout(() => {
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
 
-  //     }, 300)
-  //   }
-  // }, [files])
+    function updateStatus () {
+      const file = files.find(file => file.active)
+
+      if (!file || file.status !== 'editing') {
+        return
+      }
+
+      timer = setTimeout(() => {
+        setFiles(files.map(file => {
+          if (file.active) {
+            return {
+              ...file,
+              status: 'saving',
+            }
+          }
+
+          return file
+        }))
+
+        setTimeout(() => {
+          setFiles(files.map(file => {
+            if (file.active) {
+              return {
+                ...file,
+                status: 'saved',
+              }
+            }
+
+            return file
+          }))
+        }, 300)
+      }, 300)
+    }
+
+    updateStatus()
+    return () => clearTimeout(timer)
+  }, [files])
 
   const switchActiveFile = (id: string) => {
+    inputRef.current?.focus()
+
     setFiles(files.map(file => {
       if (file.id !== id) {
         return {
           ...file,
           active: false,
+          status: 'editing',
         }
       }
 
       return {
         ...file,
         active: true,
-        status: 'editing',
+        status: 'saved',
       }
     }))
   }
 
   const handleAddFile = (): void => {
+    inputRef.current?.focus()
+
     const inactiveOldFiles = InactivateFiles(files)
 
     setFiles([
@@ -97,32 +133,12 @@ export function App () {
     })
 
     setFiles(filesUpdated)
-    // setSaving(id)
   }
 
-  // const handleUpdateFileAttribute = (id: string, attribute: string, newValue: string | boolean) => {
-  //   const filesUpdated: FileProps[] = files.map(file => {
-  //     if (file.id === id) {
-
-  //       return {
-  //         ...file,
-  //         [attribute]: newValue
-  //       }
-  //     }
-
-  //     return file
-  //   })
-
-  //   setFiles(filesUpdated)
-  // }
-
-  // const setSaving = (id: string) => {
-  //   const timeout = setTimeout(() => {
-  //     handleUpdateFileAttribute(id, 'status', 'saving')
-  //   }, 300);
-
-  //   // return () => clearTimeout(timeout)
-  // }
+  const handleRemoveFile = (id: string) => {
+    console.log(files.filter(file => file.id !== id))
+    setFiles(files.filter(file => file.id === id))
+  }
 
   return (
     <AppWrapper>
@@ -131,6 +147,7 @@ export function App () {
         setFiles={setFiles}
         inputRef={inputRef}
         handleAddFile={handleAddFile}
+        handleRemoveFile={handleRemoveFile}
         switchActiveFile={switchActiveFile}
       />
       <MainContent

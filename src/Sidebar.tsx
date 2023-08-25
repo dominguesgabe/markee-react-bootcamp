@@ -10,7 +10,7 @@ import {
 import { SideBarProps } from 'types/AppTypes'
 import { AddFileIcon } from 'utils/SvgIcons'
 
-export const Sidebar = ({ files, inputRef, switchActiveFile, handleAddFile }: SideBarProps) => {
+export const Sidebar = ({ files, inputRef, switchActiveFile, handleAddFile, handleRemoveFile }: SideBarProps) => {
   return (
     <SidebarWrapper>
       <MainLogoBox>
@@ -32,6 +32,7 @@ export const Sidebar = ({ files, inputRef, switchActiveFile, handleAddFile }: Si
               key={file.id}
               file={file}
               switchActiveFile={switchActiveFile}
+              handleRemoveFile={handleRemoveFile}
               inputRef={inputRef}
             />
           ))
