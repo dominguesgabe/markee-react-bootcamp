@@ -136,8 +136,10 @@ export function App () {
   }
 
   const handleRemoveFile = (id: string) => {
-    console.log(files.filter(file => file.id !== id))
-    setFiles(files.filter(file => file.id === id))
+    const filteredFiles: FileProps[] = files.filter(file => file.id !== id)
+    // console.log(filteredFiles, files)
+
+    setFiles(filteredFiles)
   }
 
   return (

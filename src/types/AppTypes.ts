@@ -48,7 +48,7 @@ export type GenericProps = {
 }
 
 export type LinkProps = {
-    href: string
+    onClick: (event: any) => void
     active: boolean
 }
 
