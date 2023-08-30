@@ -94,7 +94,6 @@ export const useFiles = () => {
         status: 'saved',
       }
     }))
-
   }
 
   const handleAddFile = (): void => {
@@ -107,7 +106,6 @@ export const useFiles = () => {
       ...inactiveOldFiles,
       newFile,
     ])
-
   }
 
   const handleUpdateFileName = (id: string, newName: string): void => {
