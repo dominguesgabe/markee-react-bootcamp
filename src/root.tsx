@@ -1,5 +1,5 @@
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { theme } from 'utils/theme'
+import { theme } from 'utils/Theme'
 import { App } from './app'
 import 'normalize.css'
 
