@@ -27,7 +27,13 @@ import('highlight.js').then((hljs) => {
   })
 })
 
-export const MainContent = ({ file, inputRef, handleUpdateFileName, handleUpdateFileContent }: MainContentProps) => {
+export const MainContent = ({ files, inputRef, onUpdateFileName: handleUpdateFileName, onUpdateFileContent: handleUpdateFileContent }: MainContentProps) => {
+  const file = files.find(file => file.active)
+
+  if (!files || !file) {
+    return <></>
+  }
+
   const handleChangeFileName = (event: ChangeEvent<HTMLInputElement>): void => {
     handleUpdateFileName(file.id, event.target.value)
   }
@@ -42,6 +48,7 @@ export const MainContent = ({ file, inputRef, handleUpdateFileName, handleUpdate
         value={file.name}
         ref={inputRef}
         onChange={handleChangeFileName}
+        autoFocus
       />
       <EditingWrapper>
         <EditingTextarea

@@ -17,19 +17,19 @@ export type FileProps = {
 }
 
 export type MainContentProps = {
-    file: FileProps
+    files: FileProps[]
     inputRef: RefObject<HTMLInputElement>
-    handleUpdateFileName: (id: string, newName: string) => void
-    handleUpdateFileContent: (id: string, newName: string) => void
+    onUpdateFileName: (id: string, newName: string) => void
+    onUpdateFileContent: (id: string, newName: string) => void
 }
 
 export type SideBarProps = {
     files: FileProps[]
     inputRef: RefObject<HTMLInputElement>
     setFiles: Dispatch<SetStateAction<FileProps[]>>
-    handleAddFile: () => void
+    onAddFile: () => void
     switchActiveFile: (id: string) => void
-    handleRemoveFile: (id: string) => void
+    onRemoveFile: (id: string) => void
   }
 
 export type EditingAreaProps = {
